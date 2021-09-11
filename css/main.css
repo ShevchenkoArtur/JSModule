@@ -1,0 +1,159 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.wrapper {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 8px;
+}
+
+.date {
+    display: flex;
+    align-items: center
+}
+
+.date span {
+    font-size: 16px;
+    padding-left: 16px
+}
+
+#tasksForm {
+    border: 1px solid #eee;
+    padding: 16px;
+    margin: 0 auto;
+    width: 500px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
+}
+
+#tasksForm:hover {
+    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
+}
+
+#tasksForm label {
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+#tasksForm .input {
+    border: 1px solid #eee;
+    padding: 8px;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+}
+
+#tasksForm .input:hover,
+#tasksForm .input:focus {
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+#tasksForm .input,
+input[type="color"] {
+    display: block;
+    margin-top: 8px;
+    transition: 300ms;
+}
+
+input[type="color"] {
+    -webkit-appearance: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+}
+
+input[type="color"]:hover {
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+}
+
+.button {
+    padding: 8px;
+    border-radius: 5px;
+    background-color: green;
+    color: #fff;
+    border: 0;
+    transition: 300ms;
+}
+
+.button:hover {
+    background-color: #039903;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+table {
+    margin: 40px 0;
+}
+
+.event {
+    position: relative;
+    font-size: 14px;
+    border: 0;
+    padding: 8px 5px;
+    min-width: 200px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #806E9ECF;;
+}
+
+.delete-marker:before,
+.delete-marker:after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 2px;
+    top: 12px;
+    right: 8px;
+    background-color: #212121;
+    cursor: pointer;
+    transition: 300ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.delete-marker:before {
+    transform: rotate(45deg);
+}
+
+.delete-marker:after {
+    transform: rotate(-45deg);
+}
+
+.event:hover .delete-marker:before,
+.event:hover .delete-marker:after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.bigTime,
+.smallTime {
+    text-align: center;
+}
+
+.bigTime {
+    font-size: 16px;
+}
+
+.smallTime {
+    font-size: 12px;
+}
+
+.v-hidden {
+    visibility: hidden;
+}
+
+.d-none {
+    display: none;
+}

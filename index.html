@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <title>JavaScript Module</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <div class="date">
+                    <h1>Today</h1>
+                </div>
+                <form id="tasksForm">
+                    <h2>Create Event</h2>
+                    <label>
+                        Title
+                        <input class="input" type="text" id="titleInput" placeholder="New Event...">
+                    </label>
+                    <label>
+                        Time <small>of the events is from 08:00 to 17:00</small>
+                        <input class="input" type="time" id="startInput">
+                    </label>
+                    <label>
+                        Duration
+                        <input class="input" type="number" id="durationInput" placeholder="Measured in minutes">
+                    </label>
+                    <label>
+                        Color
+                        <input type="color" id="colorInput" value="#6E9ECF">
+                    </label>
+
+                    <button class="button" id="addBtn">Save</button>
+                </form>
+            </header>
+
+            <main id="main">
+            </main>
+        </div>
+        <script src="js/EventCalendar.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
