@@ -8,11 +8,11 @@ h1.append(dateSpan)
 addBtn = document.querySelector(`#addBtn`)
 
 eventCalendar.createTimeTable()
-eventCalendar.renderTasks()
+eventCalendar.renderEvents()
 
 addBtn.addEventListener('click', (e) => {
     e.preventDefault()
-    eventCalendar.addTask()
+    eventCalendar.addEvent()
 })
 
 const table = document.querySelector('#timeTable')
@@ -22,13 +22,5 @@ const events = document.querySelectorAll('.event')
 table.addEventListener('click', (e) => {
     const target = e.target
     if (target.tagName === 'TABLE') return
-    if (target.classList.value === 'delete-marker') eventCalendar.deleteTask(target.id)
+    if (target.classList.value === 'delete-marker') eventCalendar.deleteEvent(target.id)
 })
-
-
-
-
-
-
-
-

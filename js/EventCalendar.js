@@ -1,9 +1,13 @@
 class EventCalendar {
+    static addZeroForTime(value) {
+        return value.toString().padStart(2, '0')
+    }
+
     static getFormatTime(mins) {
         mins += 480
         let hours = Math.trunc(mins / 60)
         let minutes = mins % 60
-        return hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0')
+        return `${EventCalendar.addZeroForTime(hours)}:${EventCalendar.addZeroForTime(minutes)}`
     }
 
     static parseFormatTime(time) {
@@ -29,6 +33,39 @@ class EventCalendar {
             return `rgba(${r}, ${g}, ${b}, ${alpha})`
         } else {
             return `rgba(${r}, ${g}, ${b})`
+        }
+    }
+
+    static showNotification(title, msg) {
+        const notification = document.querySelector('.notification')
+        const namePara = document.createElement('p')
+        const msgPara = document.createElement('p')
+
+        namePara.innerText = title
+        msgPara.innerText = msg
+        notification.append(namePara, msgPara)
+
+        notification.classList.remove('hide-notification')
+        notification.classList.add('show-notification')
+
+        setTimeout(() => {
+            notification.classList.remove('show-notification')
+            notification.classList.add('hide-notification')
+        }, 3000)
+    }
+
+    static setNotificationTimeout(startTime, title) {
+        const date = new Date()
+        startTime += 480
+        let currentTime = EventCalendar.parseFormatTime(`${EventCalendar.addZeroForTime(date.getHours())}:${EventCalendar.addZeroForTime(date.getMinutes())}`)
+
+        if (currentTime < startTime) {
+            startTime *= 60000
+            currentTime *= 60000
+            let showingTime = startTime - currentTime
+            let msg = 'Has been started'
+            title = `Event - ${title}`
+            setTimeout(() => EventCalendar.showNotification(title, msg), showingTime)
         }
     }
 
@@ -104,7 +141,7 @@ class EventCalendar {
         main.append(table)
     }
 
-    addTask() {
+    addEvent() {
         let titleInput = document.querySelector('#titleInput')
         let startInput = document.querySelector('#startInput')
         let durationInput = document.querySelector('#durationInput')
@@ -120,15 +157,15 @@ class EventCalendar {
             })
         }
 
-        this.renderTasks()
+        this.renderEvents()
     }
 
-    deleteTask(id) {
+    deleteEvent(id) {
         EventCalendar.tasks = EventCalendar.tasks.filter(el => el.id !== Number(id))
-        this.renderTasks()
+        this.renderEvents()
     }
 
-    renderTasks() {
+    renderEvents() {
         const timePoints = Array.from(document.querySelector('#timeTable').childNodes)
 
         EventCalendar.removeEvents()
@@ -157,6 +194,8 @@ class EventCalendar {
                     if (!el.duration) {
                         el.duration = 1
                     }
+
+                    EventCalendar.setNotificationTimeout(el.start, el.title)
 
                     td.setAttribute('rowspan', el.duration)
                     td.append(span)
