@@ -41,6 +41,7 @@ class EventCalendar {
         const namePara = document.createElement('p')
         const msgPara = document.createElement('p')
 
+
         namePara.innerText = title
         msgPara.innerText = msg
         notification.append(namePara, msgPara)
@@ -51,6 +52,9 @@ class EventCalendar {
         setTimeout(() => {
             notification.classList.remove('show-notification')
             notification.classList.add('hide-notification')
+            while (notification.firstChild) {
+                notification.removeChild(notification.firstChild)
+            }
         }, 3000)
     }
 
@@ -58,14 +62,16 @@ class EventCalendar {
         const date = new Date()
         startTime += 480
         let currentTime = EventCalendar.parseFormatTime(`${EventCalendar.addZeroForTime(date.getHours())}:${EventCalendar.addZeroForTime(date.getMinutes())}`)
+        currentTime += 480
 
         if (currentTime < startTime) {
-            startTime *= 60000
-            currentTime *= 60000
-            let showingTime = startTime - currentTime
+            let showingTime = ((startTime - currentTime) * 60000)
             let msg = 'Has been started'
             title = `Event - ${title}`
-            setTimeout(() => EventCalendar.showNotification(title, msg), showingTime)
+
+            const timerId = setTimeout(() => {
+                EventCalendar.showNotification(title, msg)
+            }, showingTime)
         }
     }
 
@@ -163,6 +169,66 @@ class EventCalendar {
     deleteEvent(id) {
         EventCalendar.tasks = EventCalendar.tasks.filter(el => el.id !== Number(id))
         this.renderEvents()
+    }
+
+    updateEvent(target) {
+        const div = document.createElement('div')
+        const titleInput = document.createElement('input')
+        const timeInput = document.createElement('input')
+        const durationInput = document.createElement('input')
+        const colorInput = document.createElement('input')
+        const button = document.createElement('button')
+
+        const eventId = Number(target.childNodes[1].id)
+        const event = EventCalendar.tasks.find(el => el.id === eventId)
+
+        titleInput.setAttribute('style', 'display: block; margin: 8px 0')
+        titleInput.type = 'text'
+        titleInput.classList.add('input')
+        titleInput.placeholder = 'New title...'
+        titleInput.value = event.title
+
+        timeInput.setAttribute('style', 'display: block; margin-bottom: 8px')
+        timeInput.type = 'time'
+        timeInput.classList.add('input')
+        timeInput.value = EventCalendar.getFormatTime(event.start)
+
+        durationInput.setAttribute('style', 'display: block; margin-bottom: 8px')
+        durationInput.type = 'number'
+        durationInput.classList.add('input')
+        durationInput.placeholder = 'Duration'
+        durationInput.value = event.duration
+
+        colorInput.setAttribute('style', 'display: block')
+        colorInput.type = 'color'
+        colorInput.value = event.color
+
+        button.innerText = 'Save'
+        button.classList.add('button')
+        button.setAttribute('style', 'width: 100%; margin-top: 8px')
+
+        div.append(titleInput, timeInput, durationInput, colorInput, button)
+        target.append(div)
+
+        button.addEventListener('click', (e) => {
+            EventCalendar.tasks.map(el => {
+                if (el.id === eventId) {
+                    if (timeInput.value &&
+                        timeInput.value &&
+                        durationInput.value &&
+                        colorInput.value) {
+
+                        el.title = titleInput.value
+                        el.start = EventCalendar.parseFormatTime(timeInput.value)
+                        el.duration = Number(durationInput.value)
+                        el.color = colorInput.value
+
+                        div.remove()
+                        this.renderEvents()
+                    }
+                }
+            })
+        })
     }
 
     renderEvents() {

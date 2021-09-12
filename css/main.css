@@ -38,7 +38,7 @@ body {
     margin-bottom: 20px;
 }
 
-#tasksForm .input {
+.input {
     border: 1px solid #eee;
     padding: 8px;
     border-radius: 5px;
@@ -46,8 +46,8 @@ body {
     width: 100%;
 }
 
-#tasksForm .input:hover,
-#tasksForm .input:focus {
+.input:hover,
+.input:focus {
     box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
 }
 

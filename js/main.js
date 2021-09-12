@@ -24,3 +24,9 @@ table.addEventListener('click', (e) => {
     if (target.tagName === 'TABLE') return
     if (target.classList.value === 'delete-marker') eventCalendar.deleteEvent(target.id)
 })
+
+table.addEventListener('dblclick', (e) => {
+    const target = e.target
+    if (target.tagName === 'TABLE') return
+    eventCalendar.updateEvent(target)
+})
