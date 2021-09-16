@@ -1,0 +1,65 @@
+table {
+  margin: 40px auto;
+}
+
+.event {
+  position: relative;
+  font-size: 14px;
+  border: 0;
+  padding: 8px 5px;
+  min-width: 200px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.delete-marker:before,
+.delete-marker:after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 2px;
+  top: 12px;
+  right: 8px;
+  background-color: #212121;
+  cursor: pointer;
+  transition: 300ms;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.delete-marker:before {
+  transform: rotate(45deg);
+}
+
+.delete-marker:after {
+  transform: rotate(-45deg);
+}
+
+.event:hover .delete-marker:before,
+.event:hover .delete-marker:after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bigTime,
+.smallTime {
+  text-align: center;
+}
+
+.bigTime {
+  font-size: 16px;
+}
+
+.smallTime {
+  font-size: 12px;
+}
+
+.v-hidden {
+  visibility: hidden;
+}
+
+.d-none {
+  display: none;
+}

@@ -29,11 +29,7 @@ class EventCalendar {
         const g = parseInt(hex.slice(3, 5), 16)
         const b = parseInt(hex.slice(5, 7), 16)
 
-        if (alpha) {
-            return `rgba(${r}, ${g}, ${b}, ${alpha})`
-        } else {
-            return `rgba(${r}, ${g}, ${b})`
-        }
+        return alpha ? `rgba(${r}, ${g}, ${b}, ${alpha})` : `rgba(${r}, ${g}, ${b})`
     }
 
     static showNotification(title, msg) {
@@ -127,17 +123,9 @@ class EventCalendar {
             span.append(i.toString())
             span.classList.add('d-none')
 
-            if (i % 30) {
-                td.classList.add('d-none')
-            }
-
-            if (!(i % 60)) {
-                td.classList.add('bigTime')
-            }
-
-            if (!(i % 30) && (i % 60)) {
-                td.classList.add('smallTime')
-            }
+            if (i % 30) td.classList.add('d-none')
+            if (!(i % 60)) td.classList.add('bigTime')
+            if (!(i % 30) && (i % 60)) td.classList.add('smallTime')
 
             tr.append(td)
             tr.append(span)
@@ -184,18 +172,18 @@ class EventCalendar {
 
         titleInput.setAttribute('style', 'display: block; margin: 8px 0')
         titleInput.type = 'text'
-        titleInput.classList.add('input')
+        titleInput.classList.add('form__input')
         titleInput.placeholder = 'New title...'
         titleInput.value = event.title
 
         timeInput.setAttribute('style', 'display: block; margin-bottom: 8px')
         timeInput.type = 'time'
-        timeInput.classList.add('input')
+        timeInput.classList.add('form__input')
         timeInput.value = EventCalendar.getFormatTime(event.start)
 
         durationInput.setAttribute('style', 'display: block; margin-bottom: 8px')
         durationInput.type = 'number'
-        durationInput.classList.add('input')
+        durationInput.classList.add('form__input')
         durationInput.placeholder = 'Duration'
         durationInput.value = event.duration
 
@@ -213,11 +201,7 @@ class EventCalendar {
         button.addEventListener('click', (e) => {
             EventCalendar.tasks.map(el => {
                 if (el.id === eventId) {
-                    if (timeInput.value &&
-                        timeInput.value &&
-                        durationInput.value &&
-                        colorInput.value) {
-
+                    if (titleInput.value && timeInput.value) {
                         el.title = titleInput.value
                         el.start = EventCalendar.parseFormatTime(timeInput.value)
                         el.duration = Number(durationInput.value)

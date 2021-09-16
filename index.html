@@ -7,44 +7,54 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <title>JavaScript Module</title>
     </head>
     <body>
         <div class="wrapper">
-            <header>
+            <header class="header">
                 <div class="date">
                     <h1>Today</h1>
                 </div>
-                <form id="tasksForm">
-                    <h2>Create Event</h2>
-                    <label>
-                        Title
-                        <input class="input" type="text" id="titleInput" placeholder="New Event...">
-                    </label>
-                    <label>
-                        Time <small>of the events is from 08:00 to 17:00</small>
-                        <input class="input" type="time" id="startInput">
-                    </label>
-                    <label>
-                        Duration
-                        <input class="input" type="number" id="durationInput" placeholder="Measured in minutes">
-                    </label>
-                    <label>
-                        Color
-                        <input type="color" id="colorInput" value="#6E9ECF">
-                    </label>
-
-                    <button class="button" id="addBtn">Save</button>
-                </form>
+                <div class="clue">
+                    <input type="checkbox" id="clue-opener">
+                    <div class="clue__message">To edit the event, double-click on it</div>
+                    <label for="clue-opener"><img width="30" src="./images/question.svg" alt="img"></label>
+                </div>
             </header>
 
             <main id="main">
-                <div class="notification hide-notification">
-                </div>
+                <div class="notification hide-notification"></div>
+
+                <form class="form" id="tasksForm">
+                    <h2 class="form__title">Create Event</h2>
+                    <input type="checkbox" id="form-opener">
+                    <label class="form__opener" for="form-opener"></label>
+                    <div class="form__body">
+                        <label class="form__label">
+                            Title
+                            <input class="form__input" type="text" id="titleInput" placeholder="New Event...">
+                        </label>
+                        <label class="form__label">
+                            Time <small>of the events is from 08:00 to 17:00</small>
+                            <input class="form__input" type="time" id="startInput">
+                        </label>
+                        <label class="form__label">
+                            Duration
+                            <input class="form__input" type="number" id="durationInput"
+                                   placeholder="Measured in minutes">
+                        </label>
+                        <label class="form__label">
+                            Color
+                            <input type="color" id="colorInput" value="#6E9ECF">
+                        </label>
+
+                        <button class="button form__button" id="addBtn">Save</button>
+                    </div>
+                </form>
             </main>
         </div>
+
         <script src="js/EventCalendar.js"></script>
         <script src="js/main.js"></script>
     </body>

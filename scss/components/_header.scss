@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date {
+  span {
+    font-size: 16px;
+    padding-left: 16px
+  }
+}
+
+.clue {
+  display: flex;
+
+  label {
+    display: flex;
+    cursor: pointer;
+  }
+
+  &__message {
+    opacity: 0;
+    padding: 16px;
+    background-color: #eee;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.2);
+    margin-right: 16px;
+    transition: 300ms;
+  }
+}
+
+
+#clue-opener {
+  display: none;
+
+  &:checked {
+    ~ .clue__message {
+        opacity: 1;
+    }
+  }
+}
+
