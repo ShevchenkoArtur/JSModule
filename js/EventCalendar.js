@@ -37,7 +37,6 @@ class EventCalendar {
         const namePara = document.createElement('p')
         const msgPara = document.createElement('p')
 
-
         namePara.innerText = title
         msgPara.innerText = msg
         notification.append(namePara, msgPara)
@@ -46,11 +45,11 @@ class EventCalendar {
         notification.classList.add('show-notification')
 
         setTimeout(() => {
-            notification.classList.remove('show-notification')
-            notification.classList.add('hide-notification')
             while (notification.firstChild) {
                 notification.removeChild(notification.firstChild)
             }
+            notification.classList.remove('show-notification')
+            notification.classList.add('hide-notification')
         }, 3000)
     }
 
@@ -65,7 +64,7 @@ class EventCalendar {
             let msg = 'Has been started'
             title = `Event - ${title}`
 
-            const timerId = setTimeout(() => {
+            setTimeout(() => {
                 EventCalendar.showNotification(title, msg)
             }, showingTime)
         }
@@ -149,9 +148,14 @@ class EventCalendar {
                 duration: Number(durationInput.value),
                 color: colorInput.value
             })
+
+            titleInput.value = ''
+            startInput.value = ''
+            durationInput.value = ''
+            colorInput.value = '#6e9ecf'
+            this.renderEvents()
         }
 
-        this.renderEvents()
     }
 
     deleteEvent(id) {
@@ -241,15 +245,13 @@ class EventCalendar {
                     span.classList.add('delete-marker')
                     span.id = el.id
 
-                    if (!el.duration) {
-                        el.duration = 1
-                    }
-
-                    EventCalendar.setNotificationTimeout(el.start, el.title)
+                    if (!el.duration) el.duration = 1
 
                     td.setAttribute('rowspan', el.duration)
                     td.append(span)
                     timePoints[timePointIndex].append(td)
+
+                    EventCalendar.setNotificationTimeout(el.start, el.title)
                 } else {
                     console.log('Время ограничено с 08 до 17')
                 }

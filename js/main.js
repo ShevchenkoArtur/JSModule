@@ -16,8 +16,6 @@ addBtn.addEventListener('click', (e) => {
 })
 
 const table = document.querySelector('#timeTable')
-const events = document.querySelectorAll('.event')
-
 
 table.addEventListener('click', (e) => {
     const target = e.target
